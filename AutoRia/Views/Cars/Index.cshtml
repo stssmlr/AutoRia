@@ -1,4 +1,5 @@
-﻿@model List<Car>
+﻿@using AutoRia.Entities
+@model List<Car>
 
 <h1>Cars List</h1>
 <p>You can manage Cars here</p>
@@ -8,7 +9,7 @@
 <div class="container">
     <table class="table">
         <thead>
-            <tr>
+            <tr class="table-dark">
                 <th scope="col">#</th>
                 <th scope="col">Mark</th>
                 <th scope="col">Model</th>
@@ -17,6 +18,7 @@
                 <th scope="col">Price</th>
                 <th scope="col">Discount</th>
                 <th scope="col">Status</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -30,7 +32,7 @@
                         {
                             <span class="badge bg-primary">SALE</span>
                         }
-                    </td>
+                    </td> 
                     <td>
                         @i.Model
                     </td>
@@ -38,7 +40,7 @@
                         @i.Year
                     </td>
                     <td>
-                        @i.Category
+                        @i.Category?.Name
                     </td>
                     <td>
                         @if (i.Discount > 0)
@@ -63,6 +65,11 @@
                         {
                             <span class="badge bg-secondary">Out of Stock</span>
                         }
+                    </td>
+                    <td>
+                        <a asp-controller="Cars" asp-action="Delete" asp-route-id="@i.Id" class="btn btn-outline-danger">
+                            <i class="bi bi-trash-fill"></i>
+                        </a>
                     </td>
                 </tr>
             }
