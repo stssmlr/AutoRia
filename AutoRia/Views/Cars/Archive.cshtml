@@ -1,8 +1,8 @@
 ﻿@using AutoRia.Entities
 @model List<Car>
 
-<h1>Cars List</h1>
-<p>You can manage Cars here</p>
+<h1>Archived Cars</h1>
+<p>You can manage Archived Cars here</p>
 
 
 
@@ -32,7 +32,7 @@
                         {
                             <span class="badge bg-primary">SALE</span>
                         }
-                    </td> 
+                    </td>
                     <td>
                         @i.Model
                     </td>
@@ -67,8 +67,12 @@
                         }
                     </td>
                     <td>
-                        <a asp-controller="Cars" asp-action="ArchiveItem" asp-route-id="@i.Id" class="btn btn-outline-warning">
-                            <i class="bi bi-archive-fill"></i>
+                        <a asp-controller="Cars" asp-action="RestoreItem" asp-route-id="@i.Id" class="btn btn-outline-warning">
+                            <i class="bi bi-arrow-counterclockwise"></i>
+                        </a>
+
+                        <a asp-controller="Cars" asp-action="Delete" asp-route-id="@i.Id" class="btn btn-outline-danger">
+                            <i class="bi bi-trash-fill"></i>
                         </a>
                     </td>
                 </tr>
@@ -80,8 +84,8 @@
 <p>Count : @Model.Count</p>
 
 <div>
-    <a asp-action="Archive" class="btn btn-secondary">
-        <i class="bi bi-archive-fill"></i>
-        <span>Show Archived Items</span>
+    <a asp-action="Index" class="btn btn-secondary">x
+        <i class="bi bi-arrow-left"></i>
+        <span>Go Back</span>
     </a>
 </div>

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using shopL.Data;
 
@@ -10,9 +11,11 @@ using shopL.Data;
 namespace AutoRia.Migrations
 {
     [DbContext(typeof(CarsDbContext))]
-    partial class CarsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240705181008_AddCars")]
+    partial class AddCars
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,9 +31,6 @@ namespace AutoRia.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("Archived")
-                        .HasColumnType("bit");
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
@@ -65,7 +65,6 @@ namespace AutoRia.Migrations
                         new
                         {
                             Id = 1,
-                            Archived = false,
                             CategoryId = 2,
                             Discount = 5,
                             Mark = "Audi",
@@ -77,7 +76,6 @@ namespace AutoRia.Migrations
                         new
                         {
                             Id = 2,
-                            Archived = false,
                             CategoryId = 1,
                             Discount = 0,
                             Mark = "Mercedes-Benz",
@@ -89,7 +87,6 @@ namespace AutoRia.Migrations
                         new
                         {
                             Id = 3,
-                            Archived = false,
                             CategoryId = 1,
                             Discount = 0,
                             Mark = "BMW",
@@ -101,7 +98,6 @@ namespace AutoRia.Migrations
                         new
                         {
                             Id = 4,
-                            Archived = false,
                             CategoryId = 7,
                             Discount = 0,
                             Mark = "Volkswagen",

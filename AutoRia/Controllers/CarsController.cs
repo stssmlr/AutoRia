@@ -15,8 +15,19 @@ namespace AutoRia.Controllers
         {
             var cars = ctx.Cars
                 .Include(x => x.Category)
+                .Where(x => !x.Archived)
+                .ToList();
+            return View(cars);
+        }
+
+        public IActionResult Archive()
+        {
+            // .. load data from database ..
+            var cars = ctx.Cars
+                .Include(x => x.Category) // LEFT JOIN
                 .Where(x => x.Archived)
                 .ToList();
+
             return View(cars);
         }
 
@@ -29,19 +40,31 @@ namespace AutoRia.Controllers
             ctx.Cars.Remove(car);
             ctx.SaveChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Archive");
         }
 
-        public IActionResult Archive(int id)
+        public IActionResult ArchiveItem(int id)
         {
             var car = ctx.Cars.Find(id);
 
             if (car == null) return NotFound();
 
-            ctx.Cars.Remove(car);
+            car.Archived = true;
             ctx.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+
+        public IActionResult RestoreItem(int id)
+        {
+            var car = ctx.Cars.Find(id);
+
+            if (car == null) return NotFound();
+
+            car.Archived = false;
+            ctx.SaveChanges();
+
+            return RedirectToAction("Archive");
         }
     }
 }
