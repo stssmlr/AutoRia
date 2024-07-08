@@ -22,10 +22,10 @@ namespace shopL.Data
 
             modelBuilder.Entity<Car>().HasData(new List<Car>()
             {
-                new Car() {Id= 1, Mark = "Audi", Model="A8",Year=2018 ,CategoryId=2, Discount=5, Price= 19899, Quantity=2},
-                new Car() {Id= 2, Mark = "Mercedes-Benz", Model="GLS",Year=2019 ,CategoryId=1, Discount=0, Price= 29999, Quantity=3},
-                new Car() {Id= 3, Mark = "BMW", Model="X5",Year=2014 ,CategoryId=1, Discount=0, Price= 14999, Quantity=1},
-                new Car() {Id= 4, Mark = "Volkswagen", Model="Golf",Year=2015 ,CategoryId=7, Discount=0, Price= 12999, Quantity=6},
+                new Car() {Id= 1, Mark = "Audi", Model="A8",Year=2018 ,CategoryId=2, Discount=5, Price= 19899, Quantity=2, ImageUrl="https://nextcar.ua/images/blog/484/audi-a8-2022__9_.jpg"},
+                new Car() {Id= 2, Mark = "Mercedes-Benz", Model="GLS",Year=2019 ,CategoryId=1, Discount=0, Price= 29999, Quantity=3, ImageUrl="https://stimg.cardekho.com/images/carexteriorimages/930x620/Mercedes-Benz/GLS/9791/1704772236530/front-left-side-47.jpg"},
+                new Car() {Id= 3, Mark = "BMW", Model="X5",Year=2014 ,CategoryId=1, Discount=0, Price= 14999, Quantity=1, ImageUrl="https://media.ed.edmunds-media.com/bmw/x5/2025/oem/2025_bmw_x5_4dr-suv_xdrive40i_fq_oem_1_600.jpg"},
+                new Car() {Id= 4, Mark = "Volkswagen", Model="Golf",Year=2015 ,CategoryId=7, Discount=0, Price= 12999, Quantity=6, ImageUrl="https://images.prismic.io/carwow/2b4b884f-fa2b-40e2-9182-2d2c9450ac5b_37018-ThenewVolkswagenGolfeHybrid.jpg?auto=format&cs=tinysrgb&fit=crop&q=60&w=750"},
 
             });
 

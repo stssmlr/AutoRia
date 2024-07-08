@@ -11,8 +11,8 @@ using shopL.Data;
 namespace AutoRia.Migrations
 {
     [DbContext(typeof(CarsDbContext))]
-    [Migration("20240705155732_CatgoryTable")]
-    partial class CatgoryTable
+    [Migration("20240708175026_addphoto")]
+    partial class addphoto
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,11 +32,20 @@ namespace AutoRia.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("Archived")
+                        .HasColumnType("bit");
+
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Discount")
                         .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Mark")
                         .IsRequired()
@@ -65,8 +74,10 @@ namespace AutoRia.Migrations
                         new
                         {
                             Id = 1,
+                            Archived = false,
                             CategoryId = 2,
                             Discount = 5,
+                            ImageUrl = "https://nextcar.ua/images/blog/484/audi-a8-2022__9_.jpg",
                             Mark = "Audi",
                             Model = "A8",
                             Price = 19899m,
@@ -76,8 +87,10 @@ namespace AutoRia.Migrations
                         new
                         {
                             Id = 2,
+                            Archived = false,
                             CategoryId = 1,
                             Discount = 0,
+                            ImageUrl = "https://stimg.cardekho.com/images/carexteriorimages/930x620/Mercedes-Benz/GLS/9791/1704772236530/front-left-side-47.jpg",
                             Mark = "Mercedes-Benz",
                             Model = "GLS",
                             Price = 29999m,
@@ -87,8 +100,10 @@ namespace AutoRia.Migrations
                         new
                         {
                             Id = 3,
+                            Archived = false,
                             CategoryId = 1,
                             Discount = 0,
+                            ImageUrl = "https://media.ed.edmunds-media.com/bmw/x5/2025/oem/2025_bmw_x5_4dr-suv_xdrive40i_fq_oem_1_600.jpg",
                             Mark = "BMW",
                             Model = "X5",
                             Price = 14999m,
@@ -98,8 +113,10 @@ namespace AutoRia.Migrations
                         new
                         {
                             Id = 4,
+                            Archived = false,
                             CategoryId = 7,
                             Discount = 0,
+                            ImageUrl = "https://images.prismic.io/carwow/2b4b884f-fa2b-40e2-9182-2d2c9450ac5b_37018-ThenewVolkswagenGolfeHybrid.jpg?auto=format&cs=tinysrgb&fit=crop&q=60&w=750",
                             Mark = "Volkswagen",
                             Model = "Golf",
                             Price = 12999m,

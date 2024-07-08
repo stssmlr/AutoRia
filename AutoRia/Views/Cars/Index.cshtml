@@ -1,16 +1,19 @@
 ﻿@using AutoRia.Entities
 @model List<Car>
 
+<div class="container">
+
 <h1>Cars List</h1>
 <p>You can manage Cars here</p>
 
+<a asp-action="Create" class="btn btn-primary mb-2"><i class="bi bi-plus-lg"></i>Add New Car</a>
 
 
-<div class="container">
-    <table class="table">
+    <table class="table admin-product-table">
         <thead>
             <tr class="table-dark">
                 <th scope="col">#</th>
+                <th scope="col" class="text-center">Image</th>
                 <th scope="col">Mark</th>
                 <th scope="col">Model</th>
                 <th scope="col">Year</th>
@@ -24,8 +27,11 @@
         <tbody>
             @foreach (var i in Model)
             {
-                <tr>
+                <tr class="align-middle">
                     <th scope="row">@i.Id</th>
+                    <th class="text-center" scope="row">
+                        <img height="50" src="@i.ImageUrl" alt="@i.Mark" />
+                    </th>
                     <td>
                         @i.Mark
                         @if (i.Discount > 0)
@@ -76,7 +82,7 @@
 
         </tbody>
     </table>
-</div>
+
 <p>Count : @Model.Count</p>
 
 <div>
@@ -84,4 +90,5 @@
         <i class="bi bi-archive-fill"></i>
         <span>Show Archived Items</span>
     </a>
+</div> 
 </div>

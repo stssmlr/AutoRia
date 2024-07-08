@@ -1,0 +1,63 @@
+﻿@model Car
+
+
+<h1>Adding car</h1>
+
+
+<form class="row g-3" method="post" asp-action="Create">
+    <div class="col-12">
+        <label asp-for=Mark class="form-label">Mark</label>
+        <input asp-for=Mark required type="text" class="form-control" placeholder="Enter Car's Mark">
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Model</label>
+        <input asp-for=Model required type="text" class="form-control" placeholder="Enter Car's Model">
+    </div>
+    <div class="col-md-6">
+        <label asp-for=Year class ="form-label">Year</label>
+        <input asp-for=Year required type="number" class="form-control" placeholder="Enter Car's Year">
+    </div>
+    <div class="col-12">
+        <label asp-for=CategoryId class="form-label">Category</label>
+        <select asp-for=CategoryId asp-items=@ViewBag.Categories class="form-select">
+            <option disabled selected>Choose Car's Category...</option>
+        </select>
+    </div>
+    <div class="col-md-4">
+        <label asp-for=Price class ="form-label">Price</label>
+        <div class="input-group">
+            <input asp-for=Price min="0" step="0.01" type="number" class="form-control" placeholder="Enter Car's Price">
+            <span class="input-group-text">$</span>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <label asp-for=Discount class ="form-label">Discount</label>
+        <div class="input-group">
+            <input asp-for=Discount value="0" min="0" max="100" step="1" type="number" class="form-control" placeholder="Enter Car's Discount">
+            <span class="input-group-text">%</span>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <label asp-for=Quantity class ="form-label">Quantity</label>
+        <input asp-for=Quantity value="1" min="0" step="1" type="number" class="form-control" placeholder="Enter Car's Quantity">
+    </div>
+    <div class="col-md-12">
+        <label asp-for=Description class="form-label">Description</label>
+        <textarea asp-for=Description maxlength="10000" placeholder="Enter Car's Description" class="form-control" rows="3"></textarea>
+    </div>
+
+
+    <div class="col-md-6">
+        <a asp-action="Index" class="btn btn-dark w-100">
+            <i class="bi bi-arrow-left"></i>
+            Back
+        </a>
+    </div>
+    <div class="col-md-6">
+        <button type="submit" class="btn btn-success w-100">
+            <i class="bi bi-plus-lg"></i>
+            Create
+        </button>
+    </div>
+
+</form>

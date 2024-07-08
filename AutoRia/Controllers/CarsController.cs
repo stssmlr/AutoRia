@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using AutoRia.Entities;
 using shopL.Data;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AutoRia.Controllers
 {
@@ -65,6 +67,24 @@ namespace AutoRia.Controllers
             ctx.SaveChanges();
 
             return RedirectToAction("Archive");
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            ViewBag.Categories = new SelectList(ctx.Category.ToList(), "Id", "Name");
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Car car)
+        {
+            // TODO: add data validation
+
+            ctx.Cars.Add(car);
+            ctx.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
 }

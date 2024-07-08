@@ -1,6 +1,11 @@
 ﻿@using AutoRia.Entities
 @model List<Car>
 
+
+@{
+    int selectedId = 0;
+}
+
 <h1>Archived Cars</h1>
 <p>You can manage Archived Cars here</p>
 
@@ -70,6 +75,7 @@
                         <a asp-controller="Cars" asp-action="RestoreItem" asp-route-id="@i.Id" class="btn btn-outline-warning">
                             <i class="bi bi-arrow-counterclockwise"></i>
                         </a>
+                        <!-- TODO: use modal dialog -->
 
                         <a asp-controller="Cars" asp-action="Delete" asp-route-id="@i.Id" class="btn btn-outline-danger">
                             <i class="bi bi-trash-fill"></i>
@@ -84,7 +90,7 @@
 <p>Count : @Model.Count</p>
 
 <div>
-    <a asp-action="Index" class="btn btn-secondary">x
+    <a asp-action="Index" class="btn btn-secondary">
         <i class="bi bi-arrow-left"></i>
         <span>Go Back</span>
     </a>
