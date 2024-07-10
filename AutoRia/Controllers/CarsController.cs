@@ -13,6 +13,8 @@ namespace AutoRia.Controllers
         {
 
         }
+
+        // -+-+-+-+-+-+-+-+-+-+-+-+- INDEX -+-+-+-+-+-+-+-+-+-+-+-+-
         public IActionResult Index()
         {
             var cars = ctx.Cars
@@ -22,6 +24,7 @@ namespace AutoRia.Controllers
             return View(cars);
         }
 
+        // -+-+-+-+-+-+-+-+-+-+-+-+- ARCHIEVE -+-+-+-+-+-+-+-+-+-+-+-+-
         public IActionResult Archive()
         {
             // .. load data from database ..
@@ -31,18 +34,6 @@ namespace AutoRia.Controllers
                 .ToList();
 
             return View(cars);
-        }
-
-        public IActionResult Delete(int id)
-        {
-            var car = ctx.Cars.Find(id);
-
-            if (car == null) return NotFound();
-
-            ctx.Cars.Remove(car);
-            ctx.SaveChanges();
-
-            return RedirectToAction("Archive");
         }
 
         public IActionResult ArchiveItem(int id)
@@ -57,6 +48,20 @@ namespace AutoRia.Controllers
             return RedirectToAction("Index");
         }
 
+        // -+-+-+-+-+-+-+-+-+-+-+-+- DELETE -+-+-+-+-+-+-+-+-+-+-+-+-
+        public IActionResult Delete(int id)
+        {
+            var car = ctx.Cars.Find(id);
+
+            if (car == null) return NotFound();
+
+            ctx.Cars.Remove(car);
+            ctx.SaveChanges();
+
+            return RedirectToAction("Archive");
+        }
+
+        // -+-+-+-+-+-+-+-+-+-+-+-+- RESTORE FROM ARCHIEVE -+-+-+-+-+-+-+-+-+-+-+-+-
         public IActionResult RestoreItem(int id)
         {
             var car = ctx.Cars.Find(id);
@@ -69,11 +74,13 @@ namespace AutoRia.Controllers
             return RedirectToAction("Archive");
         }
 
+        // -+-+-+-+-+-+-+-+-+-+-+-+- CREATE -+-+-+-+-+-+-+-+-+-+-+-+-
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Categories = new SelectList(ctx.Category.ToList(), "Id", "Name");
-            return View();
+            LoadCategories();
+            ViewBag.CreateMode = true;
+            return View("Upsert");
         }
 
         [HttpPost]
@@ -85,6 +92,37 @@ namespace AutoRia.Controllers
             ctx.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+
+        // -+-+-+-+-+-+-+-+-+-+-+-+- EDIT -+-+-+-+-+-+-+-+-+-+-+-+-
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var car = ctx.Cars.Find(id);
+
+            if (car == null) return NotFound();
+
+            LoadCategories();
+            ViewBag.CreateMode = false;
+            return View("Upsert", car);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Car car)
+        {
+            // TODO: add data validation
+
+            ctx.Cars.Update(car);
+            ctx.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        // -+-+-+-+-+-+-+-+-+-+-+-+- FUNCTIONS -+-+-+-+-+-+-+-+-+-+-+-+-
+        private void LoadCategories()
+        {
+            // ViewBag.PropertyName = value;
+            ViewBag.Categories = new SelectList(ctx.Category.ToList(), "Id", "Name");
         }
     }
 }

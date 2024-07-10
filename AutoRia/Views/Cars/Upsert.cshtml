@@ -1,14 +1,22 @@
 ﻿@model Car
 
+@{
+    var create = ViewBag.CreateMode;
+}
 
-<h1>Adding car</h1>
+<h1>@(create ? "Add" : "Edit") Car Form</h1>
 
 
-<form class="row g-3" method="post" asp-action="Create">
-    <div class="col-12">
+<form class="row g-3" method="post" asp-action="@(create ? "Create" : "Edit")">
+    <div class="col-6">
+        <label asp-for=ImageUrl class="form-label">Image URL</label>
+        <input asp-for=ImageUrl required type="text" class="form-control" placeholder="Enter car's image address">
+    </div>
+    <div class="col-6">
         <label asp-for=Mark class="form-label">Mark</label>
         <input asp-for=Mark required type="text" class="form-control" placeholder="Enter Car's Mark">
     </div>
+
     <div class="col-md-6">
         <label class="form-label">Model</label>
         <input asp-for=Model required type="text" class="form-control" placeholder="Enter Car's Model">
@@ -56,7 +64,7 @@
     <div class="col-md-6">
         <button type="submit" class="btn btn-success w-100">
             <i class="bi bi-plus-lg"></i>
-            Create
+            @(create ? "Create" : "Edit")
         </button>
     </div>
 

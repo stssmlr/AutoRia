@@ -73,9 +73,13 @@
                         }
                     </td>
                     <td>
+                        <a asp-controller="Cars" asp-action="Edit" asp-route-id="@i.Id" class="btn btn-outline-info">
+                            <i class="bi bi-pencil-fill"></i>
+                        </a>
                         <a asp-controller="Cars" asp-action="ArchiveItem" asp-route-id="@i.Id" class="btn btn-outline-warning">
                             <i class="bi bi-archive-fill"></i>
                         </a>
+                        
                     </td>
                 </tr>
             }
