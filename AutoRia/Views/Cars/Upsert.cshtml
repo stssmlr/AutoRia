@@ -25,6 +25,16 @@
         <label asp-for=Year class ="form-label">Year</label>
         <input asp-for=Year required type="number" class="form-control" placeholder="Enter Car's Year">
     </div>
+    <div class="col-6">
+        <label asp-for=FuelTypeId class="form-label">Type Of Fuel</label>
+        <select asp-for=FuelTypeId asp-items=@ViewBag.FuelTypes class="form-select">
+            <option disabled selected>Choose Car's Type Of Fuel...</option>
+        </select>
+    </div>
+    <div class="col-md-6">
+        <label asp-for=Mileage class="form-label">Mileage</label>
+        <input asp-for=Mileage required type="number" class="form-control" placeholder="Enter Car's Melieage">
+    </div>
     <div class="col-12">
         <label asp-for=CategoryId class="form-label">Category</label>
         <select asp-for=CategoryId asp-items=@ViewBag.Categories class="form-select">

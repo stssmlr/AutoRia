@@ -19,6 +19,7 @@ namespace AutoRia.Controllers
         {
             var cars = ctx.Cars
                 .Include(x => x.Category)
+                .Include(x => x.FuelType)
                 .Where(x => !x.Archived)
                 .ToList();
             return View(cars);
@@ -78,6 +79,7 @@ namespace AutoRia.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            LoadTypesOfFuel();
             LoadCategories();
             ViewBag.CreateMode = true;
             return View("Upsert");
@@ -102,6 +104,7 @@ namespace AutoRia.Controllers
 
             if (car == null) return NotFound();
 
+            LoadTypesOfFuel();
             LoadCategories();
             ViewBag.CreateMode = false;
             return View("Upsert", car);
@@ -123,6 +126,11 @@ namespace AutoRia.Controllers
         {
             // ViewBag.PropertyName = value;
             ViewBag.Categories = new SelectList(ctx.Category.ToList(), "Id", "Name");
+        }
+        private void LoadTypesOfFuel()
+        {
+            // ViewBag.PropertyName = value;
+            ViewBag.FuelTypes = new SelectList(ctx.FuelType.ToList(), "Id", "Name");
         }
     }
 }

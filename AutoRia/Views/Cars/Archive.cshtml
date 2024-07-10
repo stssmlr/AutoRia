@@ -2,10 +2,6 @@
 @model List<Car>
 
 
-@{
-    int selectedId = 0;
-}
-
 <h1>Archived Cars</h1>
 <p>You can manage Archived Cars here</p>
 
@@ -72,7 +68,7 @@
                         }
                     </td>
                     <td>
-                        <a asp-controller="Cars" asp-action="RestoreItem" asp-route-id="@i.Id" class="btn btn-outline-warning">
+                        <a asp-controller="Cars" asp-action="RestoreItem" asp-route-id="@i.Id" class="btn btn-outline-primary">
                             <i class="bi bi-arrow-counterclockwise"></i>
                         </a>
                         <!-- TODO: use modal dialog -->

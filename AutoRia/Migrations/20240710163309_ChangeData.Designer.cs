@@ -11,8 +11,8 @@ using shopL.Data;
 namespace AutoRia.Migrations
 {
     [DbContext(typeof(CarsDbContext))]
-    [Migration("20240708175026_addphoto")]
-    partial class addphoto
+    [Migration("20240710163309_ChangeData")]
+    partial class ChangeData
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,12 +44,18 @@ namespace AutoRia.Migrations
                     b.Property<int>("Discount")
                         .HasColumnType("int");
 
+                    b.Property<int>("FuelTypeId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Mark")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Mileage")
+                        .HasColumnType("int");
 
                     b.Property<string>("Model")
                         .IsRequired()
@@ -68,6 +74,8 @@ namespace AutoRia.Migrations
 
                     b.HasIndex("CategoryId");
 
+                    b.HasIndex("FuelTypeId");
+
                     b.ToTable("Cars");
 
                     b.HasData(
@@ -77,8 +85,10 @@ namespace AutoRia.Migrations
                             Archived = false,
                             CategoryId = 2,
                             Discount = 5,
+                            FuelTypeId = 2,
                             ImageUrl = "https://nextcar.ua/images/blog/484/audi-a8-2022__9_.jpg",
                             Mark = "Audi",
+                            Mileage = 390000,
                             Model = "A8",
                             Price = 19899m,
                             Quantity = 2,
@@ -90,8 +100,10 @@ namespace AutoRia.Migrations
                             Archived = false,
                             CategoryId = 1,
                             Discount = 0,
+                            FuelTypeId = 3,
                             ImageUrl = "https://stimg.cardekho.com/images/carexteriorimages/930x620/Mercedes-Benz/GLS/9791/1704772236530/front-left-side-47.jpg",
                             Mark = "Mercedes-Benz",
+                            Mileage = 110000,
                             Model = "GLS",
                             Price = 29999m,
                             Quantity = 3,
@@ -103,8 +115,10 @@ namespace AutoRia.Migrations
                             Archived = false,
                             CategoryId = 1,
                             Discount = 0,
+                            FuelTypeId = 1,
                             ImageUrl = "https://media.ed.edmunds-media.com/bmw/x5/2025/oem/2025_bmw_x5_4dr-suv_xdrive40i_fq_oem_1_600.jpg",
                             Mark = "BMW",
+                            Mileage = 220000,
                             Model = "X5",
                             Price = 14999m,
                             Quantity = 1,
@@ -116,8 +130,10 @@ namespace AutoRia.Migrations
                             Archived = false,
                             CategoryId = 7,
                             Discount = 0,
+                            FuelTypeId = 5,
                             ImageUrl = "https://images.prismic.io/carwow/2b4b884f-fa2b-40e2-9182-2d2c9450ac5b_37018-ThenewVolkswagenGolfeHybrid.jpg?auto=format&cs=tinysrgb&fit=crop&q=60&w=750",
                             Mark = "Volkswagen",
+                            Mileage = 91000,
                             Model = "Golf",
                             Price = 12999m,
                             Quantity = 6,
@@ -179,6 +195,50 @@ namespace AutoRia.Migrations
                         });
                 });
 
+            modelBuilder.Entity("AutoRia.Entities.FuelType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FuelType");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = " Gasoline"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Diesel"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Gas"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Electro"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Hybrid"
+                        });
+                });
+
             modelBuilder.Entity("AutoRia.Entities.Car", b =>
                 {
                     b.HasOne("AutoRia.Entities.Category", "Category")
@@ -187,10 +247,23 @@ namespace AutoRia.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("AutoRia.Entities.FuelType", "FuelType")
+                        .WithMany("Cars")
+                        .HasForeignKey("FuelTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Category");
+
+                    b.Navigation("FuelType");
                 });
 
             modelBuilder.Entity("AutoRia.Entities.Category", b =>
+                {
+                    b.Navigation("Cars");
+                });
+
+            modelBuilder.Entity("AutoRia.Entities.FuelType", b =>
                 {
                     b.Navigation("Cars");
                 });

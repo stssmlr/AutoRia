@@ -7,6 +7,8 @@
         public string Mark { get; set; }
         public string Model { get; set; }
         public int Year { get; set; }
+        public int Mileage { get; set; }
+        public int FuelTypeId { get; set; }
         public decimal Price { get; set; }
         public int Discount { get; set; }
         public int Quantity { get; set; }
@@ -17,6 +19,7 @@
         // -------- navigation property ----------
 
         public Category? Category { get; set; }
+        public FuelType? FuelType { get; set; }
 
     }
 

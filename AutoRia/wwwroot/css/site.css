@@ -28,3 +28,18 @@ body {
 .admin-product-table img:hover {
     transform: scale(2)
 }
+
+.btn-primary {
+    background-color: #003752;
+    border: 0px;
+}
+
+.btn-outline-primary {
+    color: #003752;
+    border: 1px solid #003752;
+}
+
+.home-product-list .card img {
+    object-fit: contain;
+    margin-top: 4px;
+}

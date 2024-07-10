@@ -7,7 +7,7 @@
 namespace AutoRia.Migrations
 {
     /// <inheritdoc />
-    public partial class addphoto : Migration
+    public partial class ChangeData : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -26,6 +26,19 @@ namespace AutoRia.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "FuelType",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FuelType", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Cars",
                 columns: table => new
                 {
@@ -35,6 +48,8 @@ namespace AutoRia.Migrations
                     Mark = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Year = table.Column<int>(type: "int", nullable: false),
+                    Mileage = table.Column<int>(type: "int", nullable: false),
+                    FuelTypeId = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Discount = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
@@ -49,6 +64,12 @@ namespace AutoRia.Migrations
                         name: "FK_Cars_Category_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Category",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Cars_FuelType_FuelTypeId",
+                        column: x => x.FuelTypeId,
+                        principalTable: "FuelType",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -68,20 +89,37 @@ namespace AutoRia.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Cars",
-                columns: new[] { "Id", "Archived", "CategoryId", "Description", "Discount", "ImageUrl", "Mark", "Model", "Price", "Quantity", "Year" },
+                table: "FuelType",
+                columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 1, false, 2, null, 5, "https://nextcar.ua/images/blog/484/audi-a8-2022__9_.jpg", "Audi", "A8", 19899m, 2, 2018 },
-                    { 2, false, 1, null, 0, "https://stimg.cardekho.com/images/carexteriorimages/930x620/Mercedes-Benz/GLS/9791/1704772236530/front-left-side-47.jpg", "Mercedes-Benz", "GLS", 29999m, 3, 2019 },
-                    { 3, false, 1, null, 0, "https://media.ed.edmunds-media.com/bmw/x5/2025/oem/2025_bmw_x5_4dr-suv_xdrive40i_fq_oem_1_600.jpg", "BMW", "X5", 14999m, 1, 2014 },
-                    { 4, false, 7, null, 0, "https://images.prismic.io/carwow/2b4b884f-fa2b-40e2-9182-2d2c9450ac5b_37018-ThenewVolkswagenGolfeHybrid.jpg?auto=format&cs=tinysrgb&fit=crop&q=60&w=750", "Volkswagen", "Golf", 12999m, 6, 2015 }
+                    { 1, " Gasoline" },
+                    { 2, "Diesel" },
+                    { 3, "Gas" },
+                    { 4, "Electro" },
+                    { 5, "Hybrid" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Cars",
+                columns: new[] { "Id", "Archived", "CategoryId", "Description", "Discount", "FuelTypeId", "ImageUrl", "Mark", "Mileage", "Model", "Price", "Quantity", "Year" },
+                values: new object[,]
+                {
+                    { 1, false, 2, null, 5, 2, "https://nextcar.ua/images/blog/484/audi-a8-2022__9_.jpg", "Audi", 390000, "A8", 19899m, 2, 2018 },
+                    { 2, false, 1, null, 0, 3, "https://stimg.cardekho.com/images/carexteriorimages/930x620/Mercedes-Benz/GLS/9791/1704772236530/front-left-side-47.jpg", "Mercedes-Benz", 110000, "GLS", 29999m, 3, 2019 },
+                    { 3, false, 1, null, 0, 1, "https://media.ed.edmunds-media.com/bmw/x5/2025/oem/2025_bmw_x5_4dr-suv_xdrive40i_fq_oem_1_600.jpg", "BMW", 220000, "X5", 14999m, 1, 2014 },
+                    { 4, false, 7, null, 0, 5, "https://images.prismic.io/carwow/2b4b884f-fa2b-40e2-9182-2d2c9450ac5b_37018-ThenewVolkswagenGolfeHybrid.jpg?auto=format&cs=tinysrgb&fit=crop&q=60&w=750", "Volkswagen", 91000, "Golf", 12999m, 6, 2015 }
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cars_CategoryId",
                 table: "Cars",
                 column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cars_FuelTypeId",
+                table: "Cars",
+                column: "FuelTypeId");
         }
 
         /// <inheritdoc />
@@ -92,6 +130,9 @@ namespace AutoRia.Migrations
 
             migrationBuilder.DropTable(
                 name: "Category");
+
+            migrationBuilder.DropTable(
+                name: "FuelType");
         }
     }
 }
