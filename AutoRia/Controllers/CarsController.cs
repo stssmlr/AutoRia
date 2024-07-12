@@ -89,6 +89,13 @@ namespace AutoRia.Controllers
         public IActionResult Create(Car car)
         {
             // TODO: add data validation
+            if (!ModelState.IsValid)
+            {
+                ViewBag.CreateMode = true;
+                LoadTypesOfFuel();
+                LoadCategories();
+                return View("Upsert", car);
+            }
 
             ctx.Cars.Add(car);
             ctx.SaveChanges();
@@ -114,6 +121,13 @@ namespace AutoRia.Controllers
         public IActionResult Edit(Car car)
         {
             // TODO: add data validation
+            if (!ModelState.IsValid)
+            {
+                ViewBag.CreateMode = true;
+                LoadTypesOfFuel();
+                LoadCategories();
+                return View("Upsert", car);
+            }
 
             ctx.Cars.Update(car);
             ctx.SaveChanges();

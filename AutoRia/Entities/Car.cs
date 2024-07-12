@@ -1,29 +1,38 @@
-﻿namespace AutoRia.Entities
+﻿namespace AutoRia.Entities;
+using System.ComponentModel.DataAnnotations;
+
+public class Car
 {
-    public class Car
-    {
-        public int Id { get; set; }
-        public string? ImageUrl { get; set; }
-        public string Mark { get; set; }
-        public string Model { get; set; }
-        public int Year { get; set; }
-        public int Mileage { get; set; }
-        public int FuelTypeId { get; set; }
-        public decimal Price { get; set; }
-        public int Discount { get; set; }
-        public int Quantity { get; set; }
-        public int CategoryId { get; set; }
-        public bool Archived { get; set; }
-        public string? Description { get; set; }
+    public int Id { get; set; }
+    [Url]
+    public string? ImageUrl { get; set; }
+    [Required]
+    public string Mark { get; set; }
+    [Required]
+    public string Model { get; set; }
+    [Range(0, int.MaxValue)]
+    public int Year { get; set; }
+    [Range(0, int.MaxValue)]
+    public int Mileage { get; set; }
+    [Range(1, int.MaxValue, ErrorMessage = "Category is required.")]
+    public int FuelTypeId { get; set; }
+    [Range(0, int.MaxValue)]
+    public decimal Price { get; set; }
+    [Range(0, 100)]
+    public int Discount { get; set; }
+    [Range(0, int.MaxValue)]
+    public int Quantity { get; set; }
+    [Range(1, int.MaxValue, ErrorMessage = "Category is required.")]
+    public int CategoryId { get; set; }
+    public bool Archived { get; set; }
+    [MaxLength(255)]
+    public string? Description { get; set; }
 
-        // -------- navigation property ----------
+    // -------- navigation property ----------
 
-        public Category? Category { get; set; }
-        public FuelType? FuelType { get; set; }
+    public Category? Category { get; set; }
+    public FuelType? FuelType { get; set; }
 
-    }
+}
 
     //Relationship: One To Many
-
-    
-}
