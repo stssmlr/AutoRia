@@ -5,6 +5,8 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
+
+
 namespace AutoRia.Controllers
 {
     public class HomeController : Controller

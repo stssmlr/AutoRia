@@ -1,5 +1,4 @@
-﻿@using AutoRia.Entities
-@model List<Car>
+﻿@model List<CarDto>
 
 
 <h1>Archived Cars</h1>
@@ -12,8 +11,11 @@
         <thead>
             <tr class="table-dark">
                 <th scope="col">#</th>
+                <th scope="col" class="text-center">Image</th>
                 <th scope="col">Mark</th>
                 <th scope="col">Model</th>
+                <th scope="col">Mileage</th>
+                <th scope="col">Type Of Fuel</th>
                 <th scope="col">Year</th>
                 <th scope="col">Category</th>
                 <th scope="col">Price</th>
@@ -25,8 +27,11 @@
         <tbody>
             @foreach (var i in Model)
             {
-                <tr>
+                <tr class="align-middle">
                     <th scope="row">@i.Id</th>
+                    <th class="text-center" scope="row">
+                        <img height="50" src="@i.ImageUrl" alt="@i.Mark" />
+                    </th>
                     <td>
                         @i.Mark
                         @if (i.Discount > 0)
@@ -38,10 +43,16 @@
                         @i.Model
                     </td>
                     <td>
+                        @i.Mileage
+                    </td>
+                    <td>
+                        @i.FuelTypeName
+                    </td>
+                    <td>
                         @i.Year
                     </td>
                     <td>
-                        @i.Category?.Name
+                        @i.CategoryName
                     </td>
                     <td>
                         @if (i.Discount > 0)

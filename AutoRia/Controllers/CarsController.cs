@@ -3,15 +3,18 @@ using Microsoft.EntityFrameworkCore;
 using AutoRia.Entities;
 using shopL.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using AutoMapper;
+using AutoRia.Dtos;
 
 namespace AutoRia.Controllers
 {
     public class CarsController : Controller
     {
         private CarsDbContext ctx = new CarsDbContext();
-        public CarsController()
+        private readonly IMapper mapper;
+        public CarsController(IMapper mapper)
         {
-
+            this.mapper = mapper;
         }
 
         // -+-+-+-+-+-+-+-+-+-+-+-+- INDEX -+-+-+-+-+-+-+-+-+-+-+-+-
@@ -22,10 +25,10 @@ namespace AutoRia.Controllers
                 .Include(x => x.FuelType)
                 .Where(x => !x.Archived)
                 .ToList();
-            return View(cars);
+            return View(mapper.Map<List<CarDto>>(cars));
         }
 
-        // -+-+-+-+-+-+-+-+-+-+-+-+- ARCHIEVE -+-+-+-+-+-+-+-+-+-+-+-+-
+        // -+-+-+-+-+-+-+-+-+-+-+-+- ARCHIVE -+-+-+-+-+-+-+-+-+-+-+-+-
         public IActionResult Archive()
         {
             // .. load data from database ..
@@ -33,17 +36,17 @@ namespace AutoRia.Controllers
                 .Include(x => x.Category) // LEFT JOIN
                 .Where(x => x.Archived)
                 .ToList();
-
-            return View(cars);
+            return View(mapper.Map<List<CarDto>>(cars));
+            
         }
 
         public IActionResult ArchiveItem(int id)
         {
-            var car = ctx.Cars.Find(id);
+            var cars = ctx.Cars.Find(id);
 
-            if (car == null) return NotFound();
+            if (cars == null) return NotFound();
 
-            car.Archived = true;
+            cars.Archived = true;
             ctx.SaveChanges();
 
             return RedirectToAction("Index");
@@ -86,7 +89,7 @@ namespace AutoRia.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Car car)
+        public IActionResult Create(CarDto car)
         {
             // TODO: add data validation
             if (!ModelState.IsValid)
@@ -97,7 +100,22 @@ namespace AutoRia.Controllers
                 return View("Upsert", car);
             }
 
-            ctx.Cars.Add(car);
+            // 1 - manual mapping
+            //var entity = new Product
+            //{
+            //    Name = model.Name,
+            //    Archived = model.Archived,
+            //    CategoryId = model.CategoryId,
+            //    Description = model.Description,
+            //    Discount = model.Discount,
+            //    ImageUrl = model.ImageUrl,
+            //    Price = model.Price,
+            //    Quantity = model.Quantity
+            //};
+            // 2 - using Auto Mapper
+            var entity = mapper.Map<Car>(car);
+
+            ctx.Cars.Add(entity);
             ctx.SaveChanges();
 
             return RedirectToAction("Index");
@@ -114,11 +132,11 @@ namespace AutoRia.Controllers
             LoadTypesOfFuel();
             LoadCategories();
             ViewBag.CreateMode = false;
-            return View("Upsert", car);
+            return View("Upsert", mapper.Map<CarDto>(car));
         }
 
         [HttpPost]
-        public IActionResult Edit(Car car)
+        public IActionResult Edit(CarDto car)
         {
             // TODO: add data validation
             if (!ModelState.IsValid)
@@ -129,7 +147,7 @@ namespace AutoRia.Controllers
                 return View("Upsert", car);
             }
 
-            ctx.Cars.Update(car);
+            ctx.Cars.Update(mapper.Map<Car>(car));
             ctx.SaveChanges();
 
             return RedirectToAction("Index");

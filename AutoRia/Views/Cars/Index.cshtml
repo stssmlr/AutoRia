@@ -1,5 +1,4 @@
-﻿@using AutoRia.Entities
-@model List<Car>
+﻿@model List<CarDto>
 
 <div class="container">
 
@@ -53,13 +52,13 @@
                         @i.Mileage
                     </td>
                     <td>
-                        @i.FuelType?.Name
+                        @i.FuelTypeName
                     </td>
                     <td>
                         @i.Year
                     </td>
                     <td>
-                        @i.Category?.Name
+                        @i.CategoryName
                     </td>
                     <td>
                         @if (i.Discount > 0)
