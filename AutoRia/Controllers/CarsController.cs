@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using AutoRia.Entities;
-using shopL.Data;
+using Data.Entities;
+using Data.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using AutoMapper;
-using AutoRia.Dtos;
+using Core.Dtos;
 
 namespace AutoRia.Controllers
 {

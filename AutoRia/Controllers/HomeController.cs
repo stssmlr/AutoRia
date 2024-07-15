@@ -1,6 +1,6 @@
 using AutoRia.Models;
 using Microsoft.AspNetCore.Mvc;
-using shopL.Data;
+using Data.Data;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;

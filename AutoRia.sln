@@ -4,8 +4,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRia", "AutoRia\AutoRia.csproj", "{9C025F8B-D12F-47B1-BEBC-69A015A79D81}"
+	ProjectSection(ProjectDependencies) = postProject
+		{28705A0A-336E-45DB-8B5D-5C73B1E5C8F4} = {28705A0A-336E-45DB-8B5D-5C73B1E5C8F4}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{28705A0A-336E-45DB-8B5D-5C73B1E5C8F4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E612841F-0AD2-46B6-898A-295CBCF4BCD6} = {E612841F-0AD2-46B6-898A-295CBCF4BCD6}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{E612841F-0AD2-46B6-898A-295CBCF4BCD6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +29,10 @@ Global
 		{28705A0A-336E-45DB-8B5D-5C73B1E5C8F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28705A0A-336E-45DB-8B5D-5C73B1E5C8F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28705A0A-336E-45DB-8B5D-5C73B1E5C8F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E612841F-0AD2-46B6-898A-295CBCF4BCD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E612841F-0AD2-46B6-898A-295CBCF4BCD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E612841F-0AD2-46B6-898A-295CBCF4BCD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E612841F-0AD2-46B6-898A-295CBCF4BCD6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

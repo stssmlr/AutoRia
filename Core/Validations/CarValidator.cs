@@ -1,8 +1,6 @@
-﻿using AutoRia.Entities;
-using FluentValidation;
-using AutoRia.Dtos;
+﻿using Core.Dtos;
 
-namespace AutoRia.Validations
+namespace Core.Validations
 {
     public class CarValidator : AbstractValidator<CarDto>
     {

@@ -1,6 +1,6 @@
 using FluentValidation;
-using AutoRia.Entities;
 using FluentValidation.AspNetCore;
+using Core.MapperProfiles;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +12,7 @@ builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddFluentValidationClientsideAdapters();
 builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
 
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddAutoMapper(typeof(AppProfile));
 
 var app = builder.Build();
 

@@ -1,8 +1,8 @@
-﻿using AutoMapper;
-using AutoRia.Dtos;
-using AutoRia.Entities;
+﻿using Core.Dtos;
+using Data.Entities;
 
-namespace ShopMvcApp_PV212.MapperProfiles
+
+namespace Core.MapperProfiles
 {
     public class AppProfile : Profile
     {

@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Reflection.Emit;
-using AutoRia.Entities;
 
-namespace shopL.Data
+using Data.Entities;
+
+namespace Data.Data
 {
     public class CarsDbContext : DbContext
     {
